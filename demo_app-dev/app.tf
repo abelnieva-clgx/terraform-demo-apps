@@ -6,8 +6,8 @@ resource "random_id" "id" {
   byte_length = 2
 }
 
-resource "aws_key_pair" "ec2-haproxy" {
-  key_name   = "ec2-haproxy"
+resource "aws_key_pair" "ec2-keypair" {
+  key_name   = "ec2-keypair-terraform"
   public_key = file("./files/publickey.pub")
 }
 #
@@ -74,7 +74,7 @@ module aws-nginx-demo {
     random_id.id.hex
   )
   associate_public_ip_address = true
-  ec2_key_name                = var.ec2_key_name
+  ec2_key_name                = aws_key_pair.ec2-keypair.key_name
   vpc_security_group_ids = [
     module.web_server_sg.this_security_group_id,
     module.ssh_secure_sg.this_security_group_id
