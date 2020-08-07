@@ -64,8 +64,9 @@ module "ssh_secure_sg" {
 #
 # Create NGINX Instance
 #
+
 module aws-nginx-demo {
-  source  = "app.terraform.io/Demo_abel_apps/nginx-demo-app/aws"
+  source  = "app.terraform.io/Demo_abel_apps2/nginx-demo-app/aws"
   version = "0.1.2"
 
   prefix = format(
